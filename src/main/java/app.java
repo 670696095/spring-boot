@@ -1,6 +1,8 @@
 import com.cuizhiwen.common.Config;
 import com.cuizhiwen.common.Controller;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,6 +13,7 @@ import org.springframework.context.annotation.FilterType;
  * @Description:
  * @date 2019/1/7 10:00
  */
+@SpringBootApplication
 @EnableAutoConfiguration
 @ComponentScan
     @ComponentScan(value = "com.cuizhiwen.common", includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, classes = {Controller.class})})
@@ -29,11 +32,14 @@ public class app {
      *
      */
 
-    /**
-     * 获取已经注册到容器中的 bean 的名称
-     * @param args
-     */
     public static void main(String[] args) {
+
+        SpringApplication.run(app.class, args);
+
+        /**
+         * 获取已经注册到容器中的 bean 的名称
+         * @param args
+         */
         ApplicationContext applicationContext =
                 new AnnotationConfigApplicationContext(Config.class);
 
@@ -41,6 +47,7 @@ public class app {
         for (String beanName : beanDefinitionNames) {
             System.out.println("**********beanName************: " + beanName);
         }
+
     }
 
 }
